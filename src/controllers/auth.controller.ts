@@ -1,4 +1,3 @@
-
 // ==================== src/controllers/auth.controller.ts ====================
 import { Request, Response, NextFunction } from 'express';
 import { AuthService } from '../services/auth.service';
@@ -36,7 +35,7 @@ export class AuthController {
 
   async getProfile(req: Request, res: Response, next: NextFunction) {
     try {
-      const user = await authService.getProfile(req.user!._id.toString());
+      const user = await authService.getProfile(req.user?._id);
       sendSuccess(res, 200, { user });
     } catch (error) {
       next(error);

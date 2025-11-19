@@ -1,7 +1,7 @@
 // ==================== src/models/user.model.ts ====================
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, {  Schema } from 'mongoose';
 
-export interface IUser extends Document {
+export interface IUser  {
   email: string;
   password: string;
   name: string;
@@ -30,7 +30,7 @@ const userSchema = new Schema<IUser>({
     type: Date,
     default: Date.now
   }
-  
+
 });
 
 export const User = mongoose.model<IUser>('User', userSchema);
