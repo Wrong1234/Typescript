@@ -1,13 +1,13 @@
-// ==================== src/utils/password.util.ts ====================
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 
 export const hashPassword = async (password: string): Promise<string> => {
-  return bcrypt.hash(password, 12);
+  const saltRounds = 10;
+  return await bcrypt.hash(password, saltRounds);
 };
 
 export const comparePassword = async (
   password: string,
   hashedPassword: string
 ): Promise<boolean> => {
-  return bcrypt.compare(password, hashedPassword);
+  return await bcrypt.compare(password, hashedPassword);
 };

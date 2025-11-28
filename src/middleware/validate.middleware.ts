@@ -1,13 +1,24 @@
-// ==================== src/middleware/validate.middleware.ts ====================
 import { Request, Response, NextFunction } from 'express';
-import { validationResult } from 'express-validator';
-import { sendError } from '../utils/response';
+import { ZodSchema, ZodError } from 'zod';
 
-export const validate = (req: Request, res: Response, next: NextFunction) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return sendError(res, 400, errors.array()[0].msg);
-  }
-  //check code
-  next();
+export const validate = (schema: ZodSchema) => {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await schema.parseAsync({
+        body: req.body,
+        query: req.query,
+        params: req.params
+      });
+      next();
+    } catch (error) {
+      if (error instanceof ZodError) {
+        return res.status(400).json({
+          success: false,
+          message: 'Validation failed',
+          errors: error.issues
+        });
+      }
+      next(error);
+    }
+  };
 };

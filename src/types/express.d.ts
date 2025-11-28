@@ -1,10 +1,9 @@
-// ==================== src/types/express.d.ts ====================
-import { IUser } from '../models/user.model';
+import { IUserDocument } from '../auth/auth.interface';
 
 declare global {
   namespace Express {
     interface Request {
-      user?: IUser | any;
+      user?: IUserDocument;
     }
   }
 }

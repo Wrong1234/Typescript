@@ -3,7 +3,7 @@ import express, { Application } from 'express';
 import { config } from './config/env';
 import { connectDatabase } from './config/database';
 import { errorHandler } from './middleware/error.middleware';
-import authRoutes from './routes/auth.routes';
+import authRoutes from './auth/auth.routes';
 
 const app: Application = express();
 

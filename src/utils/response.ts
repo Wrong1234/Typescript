@@ -1,4 +1,3 @@
-// ==================== src/utils/response.util.ts ====================
 import { Response } from 'express';
 
 export const sendSuccess = (

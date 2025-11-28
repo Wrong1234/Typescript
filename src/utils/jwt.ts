@@ -1,16 +1,13 @@
-import jwt, { Secret } from "jsonwebtoken";
-import { config } from '../config/env';
+import jwt from 'jsonwebtoken';
 
-export const generateToken = (userId: string) => {
-  const token = jwt.sign(
-    { id: userId },             // wrap in object
-    config.jwtSecret as Secret, // use env secret
-    { expiresIn: "7d", algorithm: "HS256" }
-  );
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
-  return token;
+export const generateToken = (userId: string): string => {
+  return jwt.sign({ id: userId }, JWT_SECRET, {
+    expiresIn: '7d'
+  });
 };
 
 export const verifyToken = (token: string): any => {
-  return jwt.verify(token, config.jwtSecret as Secret);
+  return jwt.verify(token, JWT_SECRET);
 };
