@@ -9,8 +9,6 @@ yarn.lock
 pnpm-lock.yaml
 
 # Environment variables and secrets
-.env
-.env.local
 .env.*.local
 .env.production.local
 
@@ -89,7 +87,6 @@ reports/
 .coverage
 
 # Misc
-.env.test
 .env.test.local
 dist-ssr/
 .jest/
@@ -98,3 +95,4 @@ dist-ssr/
 .fleet/
 .ionide/
 *.code-workspace
+config.bat
